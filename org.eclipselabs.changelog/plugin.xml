@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.eclipselabs.changelog.ResourceMappingContributions"
+            objectClass="org.eclipse.core.resources.mapping.ResourceMapping">
+         <enablement>
+            <adapt
+                  type="org.eclipse.core.resources.mapping.ResourceMapping">
+               <test
+                     args="org.eclipse.team.core.repository,org.eclipse.team.cvs.core.cvsnature"
+                     property="org.eclipse.core.resources.projectPersistentProperty">
+               </test>
+            </adapt>
+         </enablement>
+         <action
+               class="org.eclipselabs.changelog.ChangeLogAction"
+               icon="icons/full/eview16/changelog_view.gif"
+               id="org.eclipselabs.changelog.ChangeLog"
+               label="ChangeLog"
+               menubarPath="team.main/group2"
+               tooltip="Change Log">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="CVS"
+            id="org.eclipse.team.ccvs.ui">
+      </category>
+      <view
+            category="org.eclipse.team.ccvs.ui"
+            class="org.eclipselabs.changelog.ChangeLogView"
+            icon="icons/full/eview16/changelog_view.gif"
+            id="org.eclipselabs.changelog.ChangeLogView"
+            name="ChangeLog">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            targetID="org.eclipselabs.changelog.ChangeLogView"
+            id="org.eclipselabs.changelog.ChangeLogViewActions">
+         <action
+               label="ChangeLog Filter"
+               icon="icons/full/etool16/filter.gif"
+               disabledIcon="icons/full/dtool16/filter.gif"               
+               tooltip="Filter ChangeLog Entries"
+               class="org.eclipselabs.changelog.ChangeLogFilterAction"
+               toolbarPath="actions"
+               id="cvschangelog.ChangeLogViewAction">
+         </action>
+      </viewContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.team.cvs.ui.CVSPreferences"
+            class="org.eclipselabs.changelog.ChangeLogPreferences"
+            id="org.eclipselabs.changelog.CVSChangeLogProperties"
+            name="ChangeLog">
+      </page>
+   </extension>
+</plugin>
